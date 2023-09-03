@@ -54,6 +54,9 @@ The subscribed topics for tracker:
 The published topics:
 * cmd_topic_
 
+### Thanks
+The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git). Thus our work is public for the robotics community.
+
 ## Contact us
 * [Yinghao Jia](mailto:yinghaojia@163.com)
 * Wei Tang
