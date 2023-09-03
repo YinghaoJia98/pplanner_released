@@ -1,0 +1,5 @@
+<launch>
+  <rosparam file="$(find pplanner)/config/pplanner_settings.yaml" command="load" />
+  <node name="pplanner" pkg="pplanner" type="pplanner" output="screen">
+  </node>
+</launch>

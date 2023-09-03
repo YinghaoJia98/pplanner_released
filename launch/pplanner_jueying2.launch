@@ -1,0 +1,12 @@
+<launch>
+    
+      <!-- 地形图 -->
+      <node pkg="deeprobotics_local_height_map" type="deeprobotics_local_height_map" name="deeprobotics_local_height_map" output="screen">
+        <rosparam command="load" file="$(find deeprobotics_local_height_map)/config/param_pandar_128.yaml" />
+      </node>
+
+	<!--node pkg="pplanner" type="pplanner" name="pplanner"/-->
+	<!--include file="$(find pplanner)/launch/pplanner_ceshi.launch" /-->           
+</launch>
+
+

@@ -1,0 +1,18 @@
+pplanner_settings:
+  grid_map_topic: "/grid_map_simple_demo/grid_map"
+  odometry_topic: "/Odometry"
+  grid_cell_topic: "/free_grid_cells"
+  tra_map_sizex: 6.0
+  tra_map_sizey: 6.0
+  tra_map_resolution: 0.05
+  edges_of_one_point_max: 10
+  pplaner_map_resolution: 0.3
+  traversability_score_threshold: -0.6
+  limit_box_z: 0.5
+  if_grid_cells_pub: true
+  loop_rate: 10.0
+  grid_cell_frame: "map"
+  elevation_layer: "elevation"
+  traversability_layer: "traversability"
+  world_frame: "world"
+  track_frame: "base_link"

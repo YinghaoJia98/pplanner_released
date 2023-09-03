@@ -1,0 +1,8 @@
+<launch>
+
+  <rosparam file="$(find pplanner)/config/pplanner_settings_hunterceshi.yaml" command="load" />
+  <node name="pplanner" pkg="pplanner" type="pplanner" output="screen">
+  </node>
+
+  <include file="$(find pplanner_ui)/launch/pplanner_ui.launch"/>
+</launch>
