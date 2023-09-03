@@ -1,8 +1,0 @@
-<launch>
-  <include file="$(find yesense_imu)/launch/yesense.launch"/>
-  <include file="$(find pandar_pointcloud)/launch/PandarSwift_points.launch"/>
-  <include file="$(find hesai_to_velodyne)/launch/hesai_to_velodyne.launch"/>
-  <include file="$(find jueying_lio)/launch/jueying_ceshi.launch" />
-  <include file="$(find message_transformer_cpp)/launch/jueying_shoufa_pplanner.launch" />
-
-</launch>

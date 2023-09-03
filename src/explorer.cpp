@@ -180,7 +180,7 @@ bool Explorer::updateEuclideanDistance(int robot_id_global, std::vector<int> poi
     {
         if (GraphManager_.vertices_map_.find(point_ids_global[i]) == GraphManager_.vertices_map_.end())
         {
-            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %f.", point_ids_global[i]);
+            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %d.", point_ids_global[i]);
             id_distance[point_ids_global[i]] = 10000;
             id_z_distance[point_ids_global[i]] = 10000;
         }
@@ -217,7 +217,7 @@ bool Explorer::updateEuclideanDistanceInZAxeSolely(int robot_id_global, std::vec
     {
         if (GraphManager_.vertices_map_.find(point_ids_global[i]) == GraphManager_.vertices_map_.end())
         {
-            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %f.", point_ids_global[i]);
+            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %d.", point_ids_global[i]);
             id_z_distance[point_ids_global[i]] = 10000;
         }
         else

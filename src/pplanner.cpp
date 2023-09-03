@@ -1118,131 +1118,6 @@ void PPlanner::iterator_map(grid_map::GridMap traversability_map_fun)
           }
         }
       }
-
-      /*
-            if (vertex_exist(state_to_global_, &nearest_vertices_in_global_graph_))
-            {
-              if (nearest_vertices_in_global_graph_.size() > 1)
-              {
-                ROS_ERROR("THERE IS SOMETHING WRONG WHEN CHECK IF VERTEX EXISTED IN GLOBAL GRAPH");
-
-                if (nearest_vertices_in_global_graph_.size() < 4)
-                {
-                  continue;
-                }
-                else
-                {
-                  ROS_ERROR("WHAT THE HELL! WHERE ARE THE POINTS CONMING IN GLOBAL GRAPH?");
-                  std::cout << "size of nearest_vertices_in_global_graph_ is " << nearest_vertices_in_global_graph_.size() << endl;
-                  for (int hell = 0; hell < nearest_vertices_in_global_graph_.size(); ++hell)
-                  {
-                    std::cout << "hell is " << hell << "hell id is" << nearest_vertices_in_global_graph_[hell]->id << "and state is " << std::endl
-                              << nearest_vertices_in_global_graph_[hell]->state << std::endl;
-                  }
-                  ros::shutdown();
-                  break;
-                }
-              }
-              else
-              {
-                // if (if_point_need_to_be_deleted_)
-                // {
-                //   global_graph_->removeVertex(nearest_vertices_in_global_graph_[0]);
-                //   continue;
-                // }
-
-                // nearest_vertices_in_global_graph_[0]->is_bound = vertex_is_bound;
-                if (!nearest_vertices_in_global_graph_[0]->bound_could_not_be_changed)
-                {
-                  nearest_vertices_in_global_graph_[0]->is_bound = vertex_is_bound;
-                  if (vertex_is_bound == false)
-                  {
-                    nearest_vertices_in_global_graph_[0]->bound_could_not_be_changed = true;
-                  }
-                }
-
-                if (!nearest_vertices_in_global_graph_[0]->frontier_could_not_be_changed)
-                {
-                  // ROS_INFO("Frontier_could_not_be_changed is");
-                  // std::cout << nearest_vertices_in_global_graph_[0]->frontier_could_not_be_changed << std::endl;
-                  nearest_vertices_in_global_graph_[0]->is_frontier = vertex_is_frontier;
-                  if (vertex_is_frontier == false)
-                  {
-                    nearest_vertices_in_global_graph_[0]->frontier_could_not_be_changed = true;
-                  }
-                }
-                // nearest_vertices_in_global_graph_[0]->is_frontier = vertex_is_frontier;
-                nearest_vertices_in_global_graph_[0]->state = state_to_global_;
-                // pplanner_vector_map_[nearest_vertices[0]->id].push_back(point_new_);
-                std::vector<Vertex *> nearest_vertices_in_big_box;
-                global_graph_->getNearestVerticesInBox(&state_to_global_, limit_box_x, limit_box_y,
-                                                       limit_box_z_for_edge, &nearest_vertices_in_big_box);
-                if (nearest_vertices_in_big_box.size() > 9)
-                {
-                  ROS_ERROR("THERE IS SOMETHING WRONG WITH nearest_vertices_in_big_box");
-                }
-                for (int i = 0; (i < nearest_vertices_in_big_box.size()) && (i < edges_of_one_point_max); ++i)
-                {
-                  // std::cout << "nearest id is" << nearest_vertices_in_big_box[i]->id << std::endl;
-                  Eigen::Vector3d direction(state_to_global_[0] - nearest_vertices_in_big_box[i]->state[0],
-                                            state_to_global_[1] - nearest_vertices_in_big_box[i]->state[1],
-                                            state_to_global_[2] - nearest_vertices_in_big_box[i]->state[2]);
-                  double direction_norm = direction.norm();
-
-                  // std::cout << "nearest direction is" << direction_norm << std::endl;
-                  global_graph_->removeEdge(nearest_vertices_in_global_graph_[0], nearest_vertices_in_big_box[i]);
-                  global_graph_->addEdge(nearest_vertices_in_global_graph_[0], nearest_vertices_in_big_box[i], direction_norm);
-
-                  UF_->merge(nearest_vertices_in_global_graph_[0]->id, nearest_vertices_in_big_box[i]->id);
-                }
-              }
-              continue;
-            }
-            else
-            {
-              // if (if_point_need_to_be_deleted_)
-              // {
-              //   continue;
-              // }
-              Vertex *vertex_new = new Vertex(global_graph_->generateVertexID(), state_to_global_);
-              vertex_new->is_frontier = vertex_is_frontier;
-              vertex_new->is_bound = vertex_is_bound;
-
-              if (vertex_is_frontier == false)
-              {
-                vertex_new->frontier_could_not_be_changed = true;
-              }
-              if (vertex_new->is_bound == false)
-              {
-                vertex_new->bound_could_not_be_changed = true;
-              }
-              global_graph_->addVertex(vertex_new);
-
-              UF_->addpoint(vertex_new->id);
-              // pplanner_vector_map_[vertex_new->id].push_back(point_new_);
-              std::vector<Vertex *> nearest_vertices_in_big_box;
-              global_graph_->getNearestVerticesInBox(&state_to_global_, limit_box_x, limit_box_y,
-                                                     limit_box_z_for_edge, &nearest_vertices_in_big_box);
-              if (nearest_vertices_in_big_box.size() > 9)
-              {
-                ROS_ERROR("THERE IS SOMETHING WRONG WITH nearest_vertices_in_big_box");
-              }
-              for (int i = 0; (i < nearest_vertices_in_big_box.size()) && (i < edges_of_one_point_max); ++i)
-              {
-                // std::cout << "nearest id is" << nearest_vertices_in_big_box[i]->id << std::endl;
-                Eigen::Vector3d direction(state_to_global_[0] - nearest_vertices_in_big_box[i]->state[0],
-                                          state_to_global_[1] - nearest_vertices_in_big_box[i]->state[1],
-                                          state_to_global_[2] - nearest_vertices_in_big_box[i]->state[2]);
-                double direction_norm = direction.norm();
-
-                // std::cout << "nearest direction is" << direction_norm << std::endl;
-                global_graph_->removeEdge(vertex_new, nearest_vertices_in_big_box[i]);
-                global_graph_->addEdge(vertex_new, nearest_vertices_in_big_box[i], direction_norm);
-
-                UF_->merge(vertex_new->id, nearest_vertices_in_big_box[i]->id);
-              }
-            }
-            */
     }
   }
   else
@@ -1794,62 +1669,6 @@ void PPlanner::visualizeGraph(GraphManager *graph_manager)
     }
   }
 
-  // std::pair<Graph::GraphType::vertex_iterator, Graph::GraphType::vertex_iterator> vi;
-  // graph_for_visualize->getVertexIterator(vi);
-  // for (Graph::GraphType::vertex_iterator it = vi.first; it != vi.second; ++it)
-  // {
-  //   int id = graph_for_visualize->getVertexProperty(it);
-
-  //   if (UF_->find(id) != root_of_robot_global_id_)
-  //   {
-  //     continue;
-  //   }
-  //   else
-  //   {
-  //   }
-
-  //   geometry_msgs::Point p1;
-  //   p1.x = v_map_visualize[id]->state[0];
-  //   p1.y = v_map_visualize[id]->state[1];
-  //   p1.z = v_map_visualize[id]->state[2];
-
-  //   if (v_map_visualize[id]->is_frontier)
-  //   {
-  //     gridcells_frontier_msg_.cells.push_back(p1);
-  //     frontier_id_vector_.push_back(id);
-  //     if (if_vertex_marker_also_pub)
-  //     {
-  //       vertex_frontier_marker.points.push_back(p1);
-  //     }
-  //   }
-  //   else
-  //   {
-  //     if (v_map_visualize[id]->is_bound)
-  //     {
-  //       // std::cout << "ceshi1" << std::endl;
-  //       gridcells_bound_msg_.cells.push_back(p1);
-  //     }
-  //     else
-  //     {
-  //       gridcells_msg_.cells.push_back(p1);
-  //     }
-
-  //     if (if_vertex_marker_also_pub)
-  //     {
-  //       if (v_map_visualize[id]->is_bound)
-  //       {
-  //         vertex_bound_marker.points.push_back(p1);
-  //       }
-  //       else
-  //       {
-  //         vertex_marker.points.push_back(p1);
-  //       }
-  //       // vertex_marker.points.push_back(p1);
-  //     }
-  //   }
-
-  //   // gridcells_msg_.cells.push_back(p1);
-  // }
   gridcells_msg_.header.seq++;
   gridcells_msg_.header.stamp = ros::Time::now();
   gridcells_frontier_msg_.header.seq++;
@@ -1975,20 +1794,6 @@ void PPlanner::traverability_map_Callback(const grid_map_msgs::GridMap &msg)
   {
     if_map_initialled_ = true;
   }
-
-  // ROS_INFO("HELLO,CALL BACK!");
-
-  // try
-  // {
-  //   world_base_listener.waitForTransform(Track_frame_.c_str(), World_frame_.c_str(), ros::Time(0), ros::Duration(1.0));
-  //   world_base_listener.lookupTransform(Track_frame_.c_str(), World_frame_.c_str(),
-  //                                       ros::Time(0), world_base_transform);
-  // }
-  // catch (tf::TransformException &ex)
-  // {
-  //   ROS_ERROR("%s", ex.what());
-  //   // ros::Duration(1.0).sleep();
-  // }
 
   if (if_iterator_map_with_map_Callback)
   {
@@ -2218,101 +2023,7 @@ void PPlanner::update_frontier_map(const ros::TimerEvent &event)
         }
       }
     }
-
-    // std::pair<Graph::GraphType::vertex_iterator, Graph::GraphType::vertex_iterator> vi;
-    // graph_for_update->getVertexIterator(vi);
-    // for (Graph::GraphType::vertex_iterator it = vi.first; it != vi.second; ++it)
-    // {
-    //   //  Need to be changed when maintain a big whole graph
-    //   int id = graph_for_update->getVertexProperty(it);
-    //   Vertex *vertex_to_update_ = global_graph_->getVertex(id);
-    //   if ((v_map_update[id]->is_frontier) && (!v_map_update[id]->frontier_could_not_be_changed))
-    //   {
-    //     std::vector<Vertex *> nearest_vertices_in_global_graph_for_update_;
-    //     nearest_vertices_in_global_graph_for_update_.clear();
-    //     StateVec state_(v_map_update[id]->state[0], v_map_update[id]->state[1], v_map_update[id]->state[2], 0);
-    //     if (global_graph_->getNearestVerticesInBox(&state_, pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-    //                                                pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-    //                                                limit_box_z, &nearest_vertices_in_global_graph_for_update_))
-    //     {
-    //       // ROS_ERROR("Size of nearest vertices in_global_graph_for_update_ is %ld", nearest_vertices_in_global_graph_for_update_.size());
-    //       if (nearest_vertices_in_global_graph_for_update_.size() > 8)
-    //       {
-    //         // ROS_ERROR("Size of nearest vertices in_global_graph_for_update_ is %ld", nearest_vertices_in_global_graph_for_update_.size());
-    //         // Vertex *vertex_to_update_ = global_graph_->getVertex(id);
-    //         // ROS_ERROR("Frontier of aertex to update befor is %d, and frontier_could_not_be_changed is %d.", vertex_to_update_->is_frontier, vertex_to_update_->frontier_could_not_be_changed);
-    //         vertex_to_update_->is_frontier = false;
-    //         vertex_to_update_->frontier_could_not_be_changed = true;
-    //       }
-    //       int neighbor_valid_count_ = 0;
-    //       for (int i = 0; i < nearest_vertices_in_global_graph_for_update_.size(); ++i)
-    //       {
-    //         if (nearest_vertices_in_global_graph_for_update_[i]->is_frontier == true)
-    //         {
-    //           ++neighbor_valid_count_;
-    //         }
-    //       }
-    //       if (neighbor_valid_count_ < 2)
-    //       {
-    //         vertex_to_update_->is_frontier = false;
-    //         // vertex_to_update_->frontier_could_not_be_changed = true;
-    //       }
-    //     }
-    //     else
-    //     {
-    //       vertex_to_update_->is_frontier = false;
-    //     }
-    //   }
-    // }
   }
-
-  // if (frontier_id_vector_.size() > 0)
-  // {
-  //   for (std::vector<int>::iterator it = frontier_id_vector_.begin(); it != frontier_id_vector_.end(); it++)
-  //   {
-  //     int id = *it;
-  //     Vertex *vertex_to_update_ = global_graph_->getVertex(id);
-
-  //     if ((vertex_to_update_->is_frontier) && (!vertex_to_update_->frontier_could_not_be_changed))
-  //     {
-  //       std::vector<Vertex *> nearest_vertices_in_global_graph_for_update_;
-  //       nearest_vertices_in_global_graph_for_update_.clear();
-  //       StateVec state_(vertex_to_update_->state[0], vertex_to_update_->state[1], vertex_to_update_->state[2], 0);
-  //       if (global_graph_->getNearestVerticesInBox(&state_, pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-  //                                                  pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-  //                                                  limit_box_z, &nearest_vertices_in_global_graph_for_update_))
-  //       {
-  //         // ROS_ERROR("Size of nearest vertices in_global_graph_for_update_ is %ld", nearest_vertices_in_global_graph_for_update_.size());
-  //         if (nearest_vertices_in_global_graph_for_update_.size() > 8)
-  //         {
-  //           // ROS_ERROR("Size of nearest vertices in_global_graph_for_update_ is %ld", nearest_vertices_in_global_graph_for_update_.size());
-  //           // Vertex *vertex_to_update_ = global_graph_->getVertex(id);
-  //           // ROS_ERROR("Frontier of aertex to update befor is %d, and frontier_could_not_be_changed is %d.", vertex_to_update_->is_frontier, vertex_to_update_->frontier_could_not_be_changed);
-  //           vertex_to_update_->is_frontier = false;
-  //           vertex_to_update_->frontier_could_not_be_changed = true;
-  //         }
-  //         int neighbor_valid_count_ = 0;
-  //         for (int i = 0; i < nearest_vertices_in_global_graph_for_update_.size(); ++i)
-  //         {
-  //           if (nearest_vertices_in_global_graph_for_update_[i]->is_frontier == true)
-  //           {
-  //             ++neighbor_valid_count_;
-  //           }
-  //         }
-  //         if (neighbor_valid_count_ < 2)
-  //         {
-  //           // ROS_ERROR("THe neighbor valid count is %d", neighbor_valid_count_);
-  //           vertex_to_update_->is_frontier = false;
-  //           // vertex_to_update_->frontier_could_not_be_changed = true;
-  //         }
-  //       }
-  //       else
-  //       {
-  //         vertex_to_update_->is_frontier = false;
-  //       }
-  //     }
-  //   }
-  // }
 
   if (if_update_local_planning_graph)
   {
@@ -2740,86 +2451,8 @@ void PPlanner::update_bound_map(const ros::TimerEvent &event)
         else
         {
         }
-
-        // nearest_vertices_in_big_whole_global_graph_with_obstacles_for_update_.clear();
-        // if (Big_global_graph_with_obstacles_->getNearestVerticesInBox(&state_, 0.25 * pplaner_map_resolution,
-        //                                                               pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-        //                                                               limit_box_z, &nearest_vertices_in_global_graph_for_update_))
-        // {
-        //   for (size_t index = 0; index < nearest_vertices_in_big_whole_global_graph_with_obstacles_for_update_.size(); index++)
-        //   {
-        //     if (nearest_vertices_in_big_whole_global_graph_with_obstacles_for_update_[index]->is_obstacle)
-        //     {
-        //       vertex_to_update_->is_bound = true;
-        //       break;
-        //     }
-        //     else
-        //     {
-        //     }
-        //   }
-        // }
-        // else
-        // {
-        // }
       }
     }
-
-    // std::pair<Graph::GraphType::vertex_iterator, Graph::GraphType::vertex_iterator> vi;
-    // graph_for_update->getVertexIterator(vi);
-    // for (Graph::GraphType::vertex_iterator it = vi.first; it != vi.second; ++it)
-    // {
-    //   //  Need to be changed when maintain a big whole graph
-    //   int id = graph_for_update->getVertexProperty(it);
-    //   Vertex *vertex_to_update_ = global_graph_->getVertex(id);
-    //   if (v_map_update[id]->is_frontier)
-    //   {
-    //     continue;
-    //   }
-    //   else
-    //   {
-    //     std::vector<Vertex *> nearest_vertices_in_global_graph_for_update_;
-    //     nearest_vertices_in_global_graph_for_update_.clear();
-    //     StateVec state_(v_map_update[id]->state[0], v_map_update[id]->state[1], v_map_update[id]->state[2], 0);
-    //     if (global_graph_->getNearestVerticesInBox(&state_, pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-    //                                                pplaner_map_resolution + 0.25 * pplaner_map_resolution,
-    //                                                limit_box_z, &nearest_vertices_in_global_graph_for_update_))
-    //     {
-    //       if (nearest_vertices_in_global_graph_for_update_.size() > 8)
-    //       {
-    //         if ((v_map_update[id]->is_bound)) //&& (!v_map_update[id]->bound_could_not_be_changed))
-    //         {
-    //           vertex_to_update_->is_bound = false;
-    //           vertex_to_update_->bound_could_not_be_changed = true;
-    //         }
-    //       }
-    //       else if (nearest_vertices_in_global_graph_for_update_.size() < 7)
-    //       {
-    //         vertex_to_update_->is_bound = true;
-    //       }
-    //       else
-    //       {
-    //       }
-    //       // int neighbor_valid_count_ = 0;
-    //       // for (int i = 0; i < nearest_vertices_in_global_graph_for_update_.size(); ++i)
-    //       // {
-    //       //   if (nearest_vertices_in_global_graph_for_update_[i]->is_bound == true)
-    //       //   {
-    //       //     ++neighbor_valid_count_;
-    //       //   }
-    //       // }
-    //       // if (neighbor_valid_count_ < 2)
-    //       // {
-    //       //   // might be wrong
-    //       //   vertex_to_update_->is_bound = false;
-    //       // }
-    //     }
-    //     else
-    //     {
-    //       // might be wrong
-    //       vertex_to_update_->is_bound = true;
-    //     }
-    //   }
-    // }
   }
 
   if (if_update_local_planning_graph)
@@ -5022,51 +4655,6 @@ bool PPlanner::if_robot_could_around()
             {
               int id_global5 = planning_boost_graph_->get_id_global(planning_boost_graph_->getVertexID(*it5_));
               vertex_descriptors_middle_[id_global5] = *it5_;
-              // if (*it5_ == *it3_)
-              // {
-              //   continue;
-              // }
-              // vertex_count++;
-              // for (boost::tie(it6_, end6_) = boost::adjacent_vertices(*it5_, planning_boost_graph_->graph_); it6_ != end6_; ++it6_)
-              // {
-              //   if (*it6_ == *it4_)
-              //   {
-              //     continue;
-              //   }
-              //   vertex_count++;
-              //   for (boost::tie(it7_, end7_) = boost::adjacent_vertices(*it6_, planning_boost_graph_->graph_); it7_ != end7_; ++it7_)
-              //   {
-              //     if (*it7_ == *it5_)
-              //     {
-              //       continue;
-              //     }
-              //     vertex_count++;
-              //     for (boost::tie(it8_, end8_) = boost::adjacent_vertices(*it7_, planning_boost_graph_->graph_); it8_ != end8_; ++it8_)
-              //     {
-              //       if (*it8_ == *it6_)
-              //       {
-              //         continue;
-              //       }
-              //       vertex_count++;
-              //       for (boost::tie(it9_, end9_) = boost::adjacent_vertices(*it8_, planning_boost_graph_->graph_); it9_ != end9_; ++it9_)
-              //       {
-              //         if (*it9_ == *it7_)
-              //         {
-              //           continue;
-              //         }
-              //         vertex_count++;
-              //         for (boost::tie(it10_, end10_) = boost::adjacent_vertices(*it9_, planning_boost_graph_->graph_); it10_ != end10_; ++it10_)
-              //         {
-              //           if (*it10_ == *it8_)
-              //           {
-              //             continue;
-              //           }
-              //           vertex_count++;
-              //         }
-              //       }
-              //     }
-              //   }
-              // }
             }
           }
         }
@@ -7727,30 +7315,7 @@ void PPlanner::UpdateTargetTimerCallBack(const ros::TimerEvent &event)
 
       if (IfUsePathDistanceInsteadOfEuclideanDistance_)
       {
-        // if (!Explorer_->setPlanningBoostGraph(planning_boost_graph_for_exploration_))
-        // if (!Explorer_->UpdatePlanningGraphForExploration(id_robot_global, id_robot_global, limit_box_x, limit_box_y, limit_box_z_for_edge, edges_of_one_point_max, Local_Attractive_gain_, Local_Repulsive_gain_, Local_Bound_radiu_))
-        // {
-        //   ROS_ERROR("Failed to set the planning boost graph to explorer.");
-        // }
-        // else
-        // {
-        // }
-        // // ROS_INFO("Update target Timer di 3 guan.");
-        // if (!Explorer_->setRobotGlobalId(id_robot_global))
-        // {
-        //   ROS_ERROR("Failed to set the global id of robot to explorer.");
-        // }
-        // else
-        // {
-        // }
-        // // ROS_INFO("Update target Timer di 4 guan.");
-        // if (!Explorer_->updateDistance(ids_target_global))
-        // {
-        //   ROS_ERROR("Failed to update the distance of target ids.");
-        // }
-        // else
-        // {
-        // }
+
         if (!Explorer_->setRobotGlobalIdAndConvertToRoughGlobalGraphId(id_robot_global))
         {
           ROS_ERROR("Failed to set the global id of robot to explorer.");
