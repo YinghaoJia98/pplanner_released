@@ -55,7 +55,8 @@ The published topics:
 * cmd_topic_
 
 ### Thanks
-The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git). Thus our work is public for the robotics community.
+The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git).
+Benifiting from the robotics community and we choose to make our work public.
 
 ## Contact us
 * [Yinghao Jia](mailto:yinghaojia@163.com)
