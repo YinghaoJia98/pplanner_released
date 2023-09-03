@@ -25,6 +25,8 @@ catkin build -DCMAKE_BUILD_TYPE=Release
 ### Simulation
 Intstall the simulator
 - [pplanner_simulator](https://github.com/YinghaoJia98/pplanner_simulator.git)
+
+
 Run the demo
 ```bash
 cd pplanner_ws
