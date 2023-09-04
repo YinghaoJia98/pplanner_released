@@ -54,7 +54,11 @@ The subscribed topics for tracker:
 The published topics:
 * cmd_topic_
 
-### Thanks
+
+## Experiments Videos
+[![pplanner_video]]([https://www.youtube.com/watch?v=bTqFp1aODqU&list=PLu70ME0whad9Z4epZQ9VBYagKpyMyhZZ1&index=4](https://youtu.be/mDWgfCYdEO8?si=pBm652o5YCUJ8OIT))
+
+## Thanks
 The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git).
 Benifiting from the robotics community and we choose to make our work public.
 
