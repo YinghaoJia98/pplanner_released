@@ -56,7 +56,7 @@ The published topics:
 
 
 ## Experiments Videos
-[![pplanner_video](img/front.png)]([https://www.youtube.com/watch?v=bTqFp1aODqU&list=PLu70ME0whad9Z4epZQ9VBYagKpyMyhZZ1&index=4](https://youtu.be/mDWgfCYdEO8?si=pBm652o5YCUJ8OIT))
+[![pplanner_video](img/front.png)](https://youtu.be/mDWgfCYdEO8?si=YKW1rS3wECr85p9L)
 
 ## Thanks
 The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git).
