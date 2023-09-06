@@ -1,7 +1,7 @@
 # pplanner
 This is a portable planner for ground robots.
 
-Notably, the codes of this work is cumbersome as this is finished in the past years and our attention is paied to improve the efficiency by another algorithms which is coming soon.
+Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms which is coming soon.
 ## Dependencies
 These instructions assume that ROS desktop-full of the appropriate ROS distro is installed.
 
