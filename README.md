@@ -32,7 +32,7 @@ Run the demo
 cd pplanner_ws
 catkin build -DCMAKE_BUILD_TYPE=Release
 source devel/setup.bash
-roslaunch pplanner_simulator pplanner_smb_ceshi2.launch
+roslaunch pplanner_simulator PplannerSmbCeshi2ForPplanner.launch
 roslaunch pplanner pplanner_simulator.launch
 ```
 

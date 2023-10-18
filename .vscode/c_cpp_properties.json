@@ -1,0 +1,33 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/december/pplanner_released_ws/devel/include/**",
+        "/home/december/pplanner_released_ws/src/elevation_mapping_cupy/plane_segmentation/convex_plane_decomposition/include/**",
+        "/home/december/pplanner_released_ws/src/elevation_mapping_cupy/plane_segmentation/convex_plane_decomposition_ros/include/**",
+        "/home/december/pplanner_released_ws/src/elevation_mapping_cupy/elevation_mapping_cupy/include/**",
+        "/home/december/pplanner_released_ws/src/elevation_mapping_cupy/plane_segmentation/grid_map_filters_rsl/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/lidar_simulator/lidar_gazebo_plugins/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/third_party/mav_comm/mav_msgs/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/third_party/mav_comm/mav_planning_msgs/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_released/include/**",
+        "/home/december/pplanner_released_ws/src/pybind11_catkin/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/rotors_simulator/rotors_control/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/rotors_simulator/rotors_gazebo_plugins/include/**",
+        "/home/december/pplanner_released_ws/src/pplanner_simulator/rotors_simulator/rotors_joy_interface/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
