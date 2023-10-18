@@ -1,5 +1,7 @@
 # pplanner
 This is a portable planner for ground robots.
+
+Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms which is coming soon.
 ## Dependencies
 These instructions assume that ROS desktop-full of the appropriate ROS distro is installed.
 
@@ -24,9 +26,9 @@ catkin build -DCMAKE_BUILD_TYPE=Release
 
 ### Simulation
 Intstall the simulator
-```
 - [pplanner_simulator](https://github.com/YinghaoJia98/pplanner_simulator.git)
-```
+
+
 Run the demo
 ```bash
 cd pplanner_ws
@@ -54,7 +56,11 @@ The subscribed topics for tracker:
 The published topics:
 * cmd_topic_
 
-### Thanks
+
+## Experiments Videos
+[![pplanner_video](img/front.png)](https://youtu.be/mDWgfCYdEO8?si=YKW1rS3wECr85p9L)
+
+## Thanks
 The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git).
 Benifiting from the robotics community and we choose to make our work public.
 
