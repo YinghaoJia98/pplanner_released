@@ -3,7 +3,30 @@
 #include <ros/ros.h>
 #include <string>
 #include "pplanner/graph_manager.h"
+// #include "pplanner/graph_for_frontier.h"
 #include "pplanner/graph_for_planning.h"
+// #include <unordered_map>
+//  #include "pplanner/ppath_tracker.h"
+//  #include "pplanner/union_find.h"
+
+// #include "nav_msgs/Odometry.h"
+// #include "nav_msgs/GridCells.h"
+// #include "nav_msgs/Path.h"
+// #include <grid_map_msgs/GridMap.h>
+// #include <grid_map_ros/grid_map_ros.hpp>
+// #include <tf/transform_listener.h>
+// #include <visualization_msgs/Marker.h>
+// #include <visualization_msgs/MarkerArray.h>
+
+// #include <pplanner_msgs/pplanner_pub_target.h>
+// #include <std_srvs/Trigger.h>
+
+// #include <set>
+
+// #include <thread>
+// #include <boost/graph/graphviz.hpp>
+
+// #include <mutex>
 
 class Explorer
 {

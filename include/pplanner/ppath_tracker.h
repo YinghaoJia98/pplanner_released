@@ -31,6 +31,7 @@ public:
     bool getIfNeedTurn();
     Eigen::Vector2d getTargetAttitude();
     void clearPathAndSetIfSucceedTrue();
+    bool IfNeedToUpdateTarget();
 
 private:
     ros::NodeHandle nh_;
@@ -60,6 +61,7 @@ private:
     int num_point_in_path_look_ahead_for_turn_;
     int min_inver_point;
     Eigen::Vector2d Target_attitude;
+    bool IfNeedUpdateNextTarget_;
 
     std::string World_Frame_;
     std::string Robot_Frame_;

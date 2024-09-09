@@ -1,7 +1,9 @@
 # pplanner
 This is a portable planner for ground robots.
 
-Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms which is coming soon.
+The latest updated date is September 9th, 2024.
+
+Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms, named [UFEP](https://github.com/YinghaoJia98/UFEP-Released.git) temporarily which is coming soon.
 ## Dependencies
 These instructions assume that ROS desktop-full of the appropriate ROS distro is installed.
 
@@ -11,7 +13,7 @@ Install necessary libraries:
 ```bash
 sudo apt-get install ros-noetic-grid-map-core ros-noetic-grid-map-msgs
 ```
-- [elevation_mapping_cupy](https://github.com/YinghaoJia98/elevation_mapping_cupy.git) The test_carved_stair branch is used in my experiment and the original [elevation_mapping_cupy](https://github.com/leggedrobotics/elevation_mapping_cupy.git) also can be used.
+- [elevation_mapping_cupy](https://github.com/YinghaoJia98/elevation_mapping_cupy.git) The test_carved_stair and ReviseInverseDensity branches could be used in my experiment and the original [elevation_mapping_cupy](https://github.com/leggedrobotics/elevation_mapping_cupy.git) also can be used.
 - [pplanner_msgs](https://github.com/YinghaoJia98/pplanner_msgs.git) The msg and srv files which would be in cluded into this pack in the future.
 - [pplanner_ui](https://github.com/YinghaoJia98/pplanner_ui.git) The ui files which would be in cluded into this pack in the future.
 
@@ -26,7 +28,7 @@ catkin build -DCMAKE_BUILD_TYPE=Release
 
 ### Simulation
 Intstall the simulator
-- [pplanner_simulator](https://github.com/YinghaoJia98/pplanner_simulator.git)
+- [pplanner_simulator](https://github.com/YinghaoJia98/pplanner_simulator.git), UnitreeA1MPCImproveTest might work with changing the parameters of sensors.
 
 
 Run the demo

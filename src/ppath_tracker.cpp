@@ -13,6 +13,7 @@ Ppath_Tracker::Ppath_Tracker(const ros::NodeHandle &nh, const ros::NodeHandle &n
   if_need_turn = false;
   Target_attitude << 0, 0;
   listener_ = std::make_shared<tf::TransformListener>();
+  IfNeedUpdateNextTarget_ = false;
   LoadParam();
   Initialize();
 }
@@ -184,6 +185,19 @@ bool Ppath_Tracker::computeCommandVelocity()
   }
   int closest_waypoint_ind = std::min_element(dists.begin(), dists.end()) - dists.begin();
 
+  int ForwardVerticesTrackedNumTem_ = path_tracked_.size() - closest_waypoint_ind;
+  double DistanceToTrackedTargetTem_ = calculateDistance(current_position_, path_tracked_.back());
+  if (((ForwardVerticesTrackedNumTem_ < 7) &&
+       (DistanceToTrackedTargetTem_ < 1.0)) ||
+      (ForwardVerticesTrackedNumTem_ > 5))
+  {
+    IfNeedUpdateNextTarget_ = true;
+  }
+  else
+  {
+    IfNeedUpdateNextTarget_ = false;
+  }
+
   // Prune path to the closest waypoint
   std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d>> tmp_path = path_tracked_;
   path_tracked_.clear();
@@ -255,7 +269,7 @@ bool Ppath_Tracker::computeCommandVelocity()
   Eigen::Vector3d carrot_waypoint_stamped;
   carrot_waypoint_stamped = carrot_waypoint;
   path_tracked_.push_back(carrot_waypoint_stamped);
-  for (int ind = carrot_point_ind; ind < tmp_path.size(); ++ind)
+  for (int ind = carrot_point_ind + 1; ind < tmp_path.size(); ++ind)
   {
     path_tracked_.push_back(tmp_path[ind]);
   }
@@ -508,4 +522,9 @@ void Ppath_Tracker::clearPathAndSetIfSucceedTrue()
   std::lock_guard<std::mutex> lock5(IfSucceedMutex_);
   path_tracked_.clear();
   if_track_succeed = true;
+}
+
+bool Ppath_Tracker::IfNeedToUpdateTarget()
+{
+  return IfNeedUpdateNextTarget_;
 }

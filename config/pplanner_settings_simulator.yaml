@@ -3,20 +3,20 @@ pplanner_settings:
   grid_cell_topic: "/free_grid_cells"
   grid_cells_of_frontier_topic_: "/frontier_grid_cells"
   grid_cells_of_bound_topic_: "/bound_grid_cells"
-  tra_map_sizex: 4.0
-  tra_map_sizey: 4.0
-  tra_map_resolution: 0.04 #0.03 0.04
+  tra_map_sizex: 6.0
+  tra_map_sizey: 6.0
+  tra_map_resolution: 0.08 #0.03 0.04
   edges_of_one_point_max: 10
-  pplaner_map_resolution: 0.15
+  pplaner_map_resolution: 0.3
   traversability_score_threshold_local_graph: -0.6
   traversability_score_threshold_local_graph_for_frontier: 0.3
   traversability_score_threshold_global_graph: 0.50
   traversability_score_threshold_low_bound: 0.5
-  bad_point_threshold: 3 #15 3
-  worst_point_threshold: 2 #5 2
+  bad_point_threshold: 2 #15 3
+  worst_point_threshold: 1 #5 2
   if_bad_point_threshold_improve_automatically: false
-  point_threshold: 5 #20 5
-  point_threshold_frontier: 3
+  point_threshold: 3 #20 5
+  point_threshold_frontier: 1
   limit_box_z: 1.35
   limit_box_z_for_edge: 0.25
   if_grid_cells_pub: true
@@ -41,10 +41,10 @@ pplanner_settings:
   repulsive_gain: 0.01
   bound_radiu_: 0.6
   if_plus_: true
-  x_plus_: 3.0
-  y_plus_: 3.0
+  x_plus_: 5.0
+  y_plus_: 5.0
   z_plus_: 0.3
-  Max_plus_count: 5
+  Max_plus_count: 2
   Orientation_of_tracker_update_fps: 10
   Safety_circumvent_of_tracker_update_fps: 10
   lookahead_time_for_safety_circumvent_: 1.0

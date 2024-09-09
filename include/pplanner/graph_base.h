@@ -346,3 +346,35 @@ namespace ros
 
   } // namespace serialization
 } // namespace ros
+
+#define HASH_P 116101
+#define MAX_N 10000000000
+
+class VOXEL_LOC
+{
+public:
+  double x, y, z;
+
+  VOXEL_LOC(double vx = 0, double vy = 0, double vz = 0)
+      : x(vx), y(vy), z(vz) {}
+
+  bool operator==(const VOXEL_LOC &other) const
+  {
+    return (x == other.x && y == other.y && z == other.z);
+  }
+};
+
+// Hash value
+namespace std
+{
+  template <>
+  struct hash<VOXEL_LOC>
+  {
+    double operator()(const VOXEL_LOC &s) const
+    {
+      using std::hash;
+      using std::size_t;
+      return ((((int64_t)(1000000 * s.z) * HASH_P) % MAX_N + (int64_t)(1000000 * s.y)) * HASH_P) % MAX_N + (int64_t)(1000000 * s.x);
+    }
+  };
+} // namespace std

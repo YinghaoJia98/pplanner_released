@@ -281,7 +281,7 @@ private:
     // std::unordered_map<int, std::vector<Eigen::Vector4d>> pplanner_vector_map_;
     // std::unordered_map<int, std::vector<Eigen::Vector4d> *, std::hash<int>, std::equal_to<int>, Eigen::aligned_allocator<std::pair<const int, Eigen::Vector4d>>> pplanner_vector_map_;
     // std::unordered_map<int, std::vector<Eigen::Vector4d>, std::hash<int>, std::equal_to<int>, Eigen::aligned_allocator<std::pair<const int, Eigen::Vector4d>>> pplanner_vector_map_;
-    std::unordered_map<int, std::vector<Eigen::VectorXd>, std::hash<int>, std::equal_to<int>, Eigen::aligned_allocator<std::pair<const int, Eigen::VectorXd>>> pplanner_vector_map_;
+    std::unordered_map<VOXEL_LOC, std::vector<Eigen::VectorXd>, std::hash<VOXEL_LOC>, std::equal_to<VOXEL_LOC>, Eigen::aligned_allocator<std::pair<const VOXEL_LOC, Eigen::VectorXd>>> pplanner_vector_map_;
     // std::unordered_map<int, std::vector<Eigen::VectorXd>, std::hash<int>, std::equal_to<int>, Eigen::aligned_allocator<std::pair<const int, Eigen::VectorXd>>> pplanner_vector_map_for_local_map_;
     //  might need to change the aligned content
     //    std::pair<std::pair<int, int>, std::vector<Eigen::Vector4d>> pplanner_vector_map2_;
@@ -381,6 +381,8 @@ private:
 
     Eigen::Matrix4d MembershipDegreeM_;
     Eigen::Matrix4d MembershipDegreeN_;
+
+    double RobotHeight_;
 
     ros::Timer global_graph_visualize_timer_;
     void visualizeGlobalGraphTimerCallback(const ros::TimerEvent &event);

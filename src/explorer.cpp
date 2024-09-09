@@ -180,7 +180,7 @@ bool Explorer::updateEuclideanDistance(int robot_id_global, std::vector<int> poi
     {
         if (GraphManager_.vertices_map_.find(point_ids_global[i]) == GraphManager_.vertices_map_.end())
         {
-            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %d.", point_ids_global[i]);
+            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %f.", point_ids_global[i]);
             id_distance[point_ids_global[i]] = 10000;
             id_z_distance[point_ids_global[i]] = 10000;
         }
@@ -210,14 +210,14 @@ bool Explorer::updateEuclideanDistanceInZAxeSolely(int robot_id_global, std::vec
     Vertex *RobotVertex = GraphManager_.getVertex(robot_id_global);
     Eigen::Vector3d RobotState_(RobotVertex->state[0],
                                 RobotVertex->state[1],
-                                RobotVertex->state[2]);
+                                RobotVertex->state[2] - 0.3);
 
     id_z_distance.clear();
     for (int i = 0; i < point_ids_global.size(); i++)
     {
         if (GraphManager_.vertices_map_.find(point_ids_global[i]) == GraphManager_.vertices_map_.end())
         {
-            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %d.", point_ids_global[i]);
+            ROS_ERROR("[updateEuclideanDistance_INFO]: Can not get the target state of id %f.", point_ids_global[i]);
             id_z_distance[point_ids_global[i]] = 10000;
         }
         else
@@ -816,6 +816,10 @@ void Explorer::ComputeExplorationGain(std::unordered_map<int, ExplorationGainVec
     {
         int Id_ = Iterator_.first;
         ExplorationGainVec Attribute_ = Iterator_.second;
+        if (Attribute_[0] > 15)
+        {
+            Attribute_[0] = 15;
+        }
         double ExplorationGain_ = Lambda_Size_ * Attribute_[0] * exp((-Lambda_Distance_) * Attribute_[1]) * exp((-Lambda_Obstacle_) * Attribute_[2]) * exp((-Lambda_ZDistance_) * Attribute_[3]);
         IdsAndAttribute->at(Id_)[4] = ExplorationGain_;
     }
