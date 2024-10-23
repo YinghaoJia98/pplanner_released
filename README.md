@@ -3,10 +3,10 @@ This is a portable planner for ground robots.
 
 The latest updated date is September 9th, 2024.
 
-Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms, named [UFEP](https://github.com/YinghaoJia98/UFEP-Released.git) temporarily which is coming soon.
+Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms, which is coming soon.
 ## Dependencies
 These instructions assume that ROS desktop-full of the appropriate ROS distro is installed.
-
+<!-- [UFEP](https://github.com/YinghaoJia98/UFEP-Released.git) -->
 Install necessary libraries:
 
 - [grid_map](https://github.com/ANYbotics/grid_map) (grid map library for mobile robots)
