@@ -1,9 +1,9 @@
 # pplanner
 This is a portable planner for ground robots.
 
-The latest updated date is September 9th, 2024.
+The latest updated date is October 30th, 2024.
 
-Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by another algorithms, which is coming soon.
+Notably, the codes of this work is cumbersome and no longer maintained as our attention is paied to improve the efficiency by other methods, which would be coming soon.
 ## Dependencies
 These instructions assume that ROS desktop-full of the appropriate ROS distro is installed.
 <!-- [UFEP](https://github.com/YinghaoJia98/UFEP-Released.git) -->
@@ -31,13 +31,19 @@ Intstall the simulator
 - [pplanner_simulator](https://github.com/YinghaoJia98/pplanner_simulator.git), UnitreeA1MPCImproveTest might work with changing the parameters of sensors.
 
 
-Run the demo
+Run the demo with wheeled robot [SuperMegaBot](https://github.com/ntnu-arl/smb_simulator.git).
 ```bash
 cd pplanner_ws
 catkin build -DCMAKE_BUILD_TYPE=Release
 source devel/setup.bash
 roslaunch pplanner_simulator PplannerSmbCeshi2ForPplanner.launch
 roslaunch pplanner pplanner_simulator.launch
+```
+
+Run the demo with legged robot UnitreeA1, which is controlled by [MPC](https://github.com/ShuoYangRobotics/A1-QP-MPC-Controller.git) method.
+```bash
+roslaunch pplanner_simulator PplannerUnitreeA1.launch
+roslaunch pplanner pplanner_UnitreeA1Simulator_nogdb.launch
 ```
 
 ### Parameters
@@ -61,6 +67,11 @@ The published topics:
 
 ## Experiments Videos
 [![pplanner_video](img/front.jpg)](https://youtu.be/Ml_Qq0PLGvM)
+
+## Reference
+If you utilize this codebase in your research, we kindly request you to reference our work. You can cite us as follows:
+
+ - Y. Jia, W. Tang, H. Sun, J. Yang, B. Liu and C. Wang, "Portable Planner for Enhancing Ground Robots Exploration Performance in Unstructured Environments," in IEEE Robotics and Automation Letters, vol. 9, no. 11, pp. 9295-9302, Nov. 2024, doi: 10.1109/LRA.2024.3440094.
 
 ## Thanks
 The robots used in simulator is reorganized from [GBP](https://github.com/ntnu-arl/gbplanner_ros.git).
